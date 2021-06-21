@@ -5,18 +5,10 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-  config.action_mailer.default_url_options={
-    :host => 'https://obscure-sea-14271.herokuapp.com', 
-  }
-  config.action_mailer.delivery_method=:smtp
-  config.action_mailer.smtp_settings={
-    :address        => 'smtp.mailgun.org',
-    :port           => '587',
-    :user_name      => Rails.application.credentials.dig(:mailgun, :MAILGUN_SMTP_LOGIN),
-    :password       => Rails.application.credentials.dig(:mailgun,:MAILGUN_SMTP_PASSWORD),
-    :domain         => Rails.application.credentials.dig(:mailgun,:MAILGUN_DOMAIN),
-    :authentication => :plain,
-  }
+  # config.action_mailer.default_url_options={
+  #   :host => 'https://obscure-sea-14271.herokuapp.com', 
+  # }
+  
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -74,7 +66,15 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "dead_moroz_production"
 
   config.action_mailer.perform_caching = false
-
+  config.action_mailer.delivery_method=:smtp
+  config.action_mailer.smtp_settings={
+    :address        => 'smtp.mailgun.org',
+    :port           => '587',
+    :user_name      => Rails.application.credentials.dig(:mailgun, :MAILGUN_SMTP_LOGIN),
+    :password       => Rails.application.credentials.dig(:mailgun,:MAILGUN_SMTP_PASSWORD),
+    :domain         => Rails.application.credentials.dig(:mailgun,:MAILGUN_DOMAIN),
+    :authentication => :plain
+  }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
