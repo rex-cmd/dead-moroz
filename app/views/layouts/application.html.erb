@@ -60,9 +60,8 @@
               </li>
 
               <li class="col-md-1"> </li>
-              <li class="col-md-3 logout"><%= link_to('Logout', destroy_user_session_path,
-
-                                                                   class: 'btn btn-xs btn-danger', title: 'Logout', :method => :delete) %></li>
+              <li class="col-md-3 logout">
+              <%= link_to('Logout', destroy_user_session_path,class: 'btn btn-xs btn-danger', title: 'Logout', :method => :delete) %></li>
               <% else %>
 
               <li class="col-md-4 pull-right">
@@ -77,7 +76,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
