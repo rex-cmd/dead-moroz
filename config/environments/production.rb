@@ -13,8 +13,8 @@ Rails.application.configure do
     :address        => 'smtp.mailgun.org',
     :port           => '587',
     :user_name      => Rails.application.credentials.dig(:mailgun, :MAILGUN_SMTP_LOGIN),
-    :password       => Rails.application.credentials.mailgun[:MAILGUN_SMTP_PASSWORD],
-    :domain         => Rails.application.credentials.mailgun[:MAILGUN_DOMAIN],
+    :password       => Rails.application.credentials.dig(:mailgun,:MAILGUN_SMTP_PASSWORD),
+    :domain         => Rails.application.credentials.dig(:mailgun,:MAILGUN_DOMAIN),
     :authentication => :plain,
   }
   # Eager load code on boot. This eager loads most of Rails and
