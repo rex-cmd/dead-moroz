@@ -1,0 +1,12 @@
+<h1><%= t('.edit_gift') %></h1>
+
+<main class="gift-form">
+
+  <%= form_with model: @gift, url: [user, gift], html: { id: 'gift-edit-form', class: "needs-validation", novalidate: true } do |f| %>
+    <%= render 'gift_info', f: f %>
+
+    <%= f.submit "Save", class: 'btn btn-outline-success btn-lg w-100' %>
+  <% end %>
+</main>
+
+

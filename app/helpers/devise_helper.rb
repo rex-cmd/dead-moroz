@@ -1,4 +1,3 @@
 module DeviseHelper
     
-    
 end

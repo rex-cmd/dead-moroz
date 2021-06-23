@@ -1,0 +1,45 @@
+
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <%= link_to "Dead Мoroz", root_path, class: "navbar-brand" %>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav ">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+                <%= link_to 'My gifts', user_gifts_path(current_user),  class: 'nav-link' %> 
+            </li>
+            <li class="nav-item">
+                
+                <li><%= link_to('Users', users_path) if can?(:index, User) %></li> 
+            </li>
+            <% end %>
+         </ul>
+          <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+            <li><%= link_to 'Edit profile', edit_user_registration_path  %></li>
+            <li><%= link_to 'Logout', destroy_user_session_path, :method=>:delete  %></li>
+          <% else %> 
+            <li><%= link_to 'Login', new_user_session_path %></li>
+            <li><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %></li>
+          <% end %>
+          </ul>
+          <ul class='nav navbar-right col-md-4'>
+            <%if current_user%>
+                <li class='col-md-8 user-name'>
+                <%= link_to ('<i class="fa fa-user"></i>' + current_user.first_name+current_user.last_name).html_safe, edit_user_registration_path, title:'Edit Profile'%>
+                </li>
+                <li class='col-md-1'>
+                  &nbsp;
+                </li>
+                <li class='col-md-3 logout'>
+                <%= link_to('Log Out',destroy_user_session_path, class:'btn btn-xs btn-danger', title:'Logout', :method=>:delete)%>
+                </li>
+            <%else%>
+                <li class='col-md-4 pull-right'>
+                  <%= link_to('Sign In', new_user_session_path, class:'btn btn-primary', title: 'Sign In')%>
+                </li>
+            <%end%>
+          </ul>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,15 @@
+<h1><%= t('.new_gift') %></h1>
+
+<main class="gift-form">
+  <%= form_with model: @gift, url: [user, gift], html: { class: "needs-validation", novalidate: true } do |f| %>
+    <%= render 'gift_info', f: f %>
+
+    <%= f.fields_for :images do |image| %>
+      <%= image.file_field :image, multiple: true, class: 'form-control my-2' %>
+    <% end %>
+
+    <%= f.submit "Create", class: 'btn btn-outline-success w-100' %>
+  <% end %>
+</main>
+
+

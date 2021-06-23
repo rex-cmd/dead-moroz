@@ -1,0 +1,42 @@
+<div class="py-3 text-center">
+
+<h1><%= t('.list_of_gifts') %></h1>
+<% @gifts.each do |gift| %>
+  
+  <div class="card border-dark mb-3 text-center ">
+        <h5 class="card-title">
+          <%= gift.title %>
+          <% unless current_user.kid? %>
+            <small class="fw-lighter"> (added by: <%= gift_creator(gift) %>)</small>
+          <% end %>
+        </h5>
+        <% unless gift.description.blank? %>
+          <div class="card-body mb-2">
+            <p class="card-text"><%= gift.description %></p>
+          </div>
+        <% end %>
+        
+        <% gift.images.each do |image| %>
+          <div class="card-img-top">
+            <%= image_tag image.image.url,  class: 'm-1' %>
+            <%= link_to '',
+                        user_gift_images_path(user, gift, id: image.id),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' },
+                        type: 'button',
+                        class: 'btn-close align-top' %>
+          </div>
+        <% end %>
+    
+        
+      <%= link_to 'Edit', edit_user_gift_url(current_user.id, gift.id), class: 'btn btn-success' %>
+      <%= link_to 'Delete', user_gift_path(current_user.id, gift.id) ,method: :delete, class: 'btn btn-danger' %>
+        
+  </div>
+      
+  
+<% end %>
+
+    <%= link_to 'View profile' , users_path(current_user),  class: 'btn  align-text-bottom' %>
+    <%= link_to 'New gift', new_user_gift_path,  class: "btn align-text-bottom" %>
+</div>

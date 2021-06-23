@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_235502) do
+ActiveRecord::Schema.define(version: 2021_06_22_174650) do
+
+  create_table "gifts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.integer "recipient_id", null: false
+    t.integer "added_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["added_by_id"], name: "index_gifts_on_added_by_id"
+    t.index ["recipient_id"], name: "index_gifts_on_recipient_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "image"
+    t.integer "gift_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gift_id"], name: "index_images_on_gift_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,8 +48,13 @@ ActiveRecord::Schema.define(version: 2021_06_21_235502) do
     t.date "birthday"
     t.string "adress"
     t.string "address"
+    t.integer "role", limit: 1, default: 0, null: false
+    t.text "behavior", limit: 300
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "gifts", "users", column: "added_by_id"
+  # add_foreign_key "gifts", "users", column: "recipient_id"
+  add_foreign_key "images", "gifts"
 end
