@@ -8,7 +8,8 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    Review.find(params[:id]).discard
+    @review=Review.find(params[:id])
+    @review.destroy
     redirect_to user
     flash[:success] = 'Review was successfully removed.'
   end
@@ -22,4 +23,5 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:id, :body)
   end
+  
 end

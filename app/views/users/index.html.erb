@@ -1,14 +1,11 @@
-<% if can? :toggle_selected, Gift %>
-  <%= filterable 'not_decided', title: 'Only Kids with not decided gifts', class: 'btn btn-outline-primary' %>
-<% end %>
-<table id="table-users" class="table table-striped">
-  <thead>
+
+<table class="table ">
+  <thead class="thead-dark">
     <tr>
-      <% sortable_columns.each do |column| %>
-        <th scope="col">
-          <%= sortable column, class: 'btn fw-bolder' %>
-        </th>
-      <% end %>
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -17,15 +14,13 @@
       <tr>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= user.birthdate %></td>
         <td><%= user.email %></td>
         <td class="text-center">
-          <%= show_link user, class: 'btn btn-outline-primary' %>
-          <%= show_link user.gifts.build, link: user_gifts_path(user), content: 'Gifts', class: 'btn btn-outline-primary' %>
+          <%= link_to 'Add Review', user, class: 'btn btn-outline-primary' %>
+          <%= link_to (current_user.first_name+"'s"+' gifts').html_safe, user_gifts_path(current_user),  class: 'nav-link' %> 
         </td>
       </tr> 
     <% end %>
   </tbody>
 </table>
 
-<%= paginate @users %>

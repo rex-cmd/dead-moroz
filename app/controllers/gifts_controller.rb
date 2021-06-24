@@ -3,7 +3,6 @@ class GiftsController < ApplicationController
   helper_method :user, :gift
 
   def index
-    
     @gifts = @gifts.order('created_at DESC')
   end
   def edit
@@ -39,7 +38,7 @@ class GiftsController < ApplicationController
     redirect_to user_gifts_url
     flash[:success]='Gift was successfully deleted.'
   end
-
+  
   private
 
   def user

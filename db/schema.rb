@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_004423) do
+ActiveRecord::Schema.define(version: 2021_06_24_013805) do
 
   create_table "gifts", force: :cascade do |t|
     t.string "title", null: false
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 2021_06_24_004423) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["gift_id"], name: "index_images_on_gift_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "body", limit: 280, null: false
+    t.integer "reviewee_id", null: false
+    t.integer "reviewer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reviewee_id"], name: "index_reviews_on_reviewee_id"
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,4 +68,6 @@ ActiveRecord::Schema.define(version: 2021_06_24_004423) do
   add_foreign_key "gifts", "users", column: "added_by_id"
   add_foreign_key "gifts", "users", column: "recipient_id"
   add_foreign_key "images", "gifts"
+  add_foreign_key "reviews", "users", column: "reviewee_id"
+  add_foreign_key "reviews", "users", column: "reviewer_id"
 end

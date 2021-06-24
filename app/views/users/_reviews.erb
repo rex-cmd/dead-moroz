@@ -1,47 +1,29 @@
-<hr>
-<h2 class="fw-light">Reviews:</h2>
-<% user.reviews_on.each do |review| %>
-  <% next if review.new_record? %>
+      <hr>
+      <h2 class="fw-light">Reviews:</h2>
+      <% user.reviews_on.each do |review| %>
+        <% next if review.new_record? %>
 
-  <div class="card m-1 fs-5">
-    <div class="card-body">
-        <p>
-          <%= review.body %>
-          <%= destroy_link review, link: [user, Review, id: review.id], 
-                                   content: 'Remove',
-                                   class: 'btn btn-danger position-absolute top-0 end-0 m-3' %>
-        </p>
-        <footer class="blockquote-footer m-0">
-          Added by <%= link_to reviewer(review), review.reviewer %> on <%= review.created_at.to_date %>
-        </footer>
-    </div>
-  </div>
-<% end %>
-<hr> 
-
-<% if can? :create, Review %>
-  <%= button_tag 'Add a review', 'data-bs-toggle': 'modal', 'data-bs-target': '#review-modal', class: 'btn btn-primary mb-3' %>
-<% end %>
-
-<div class="modal fade modal-centered" id="review-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">New Review</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <%= form_with model: [user, user.reviews_on.build], class: "needs-validation", html: { novalidate: true } do |form| %>
-        <div class="modal-body">
-         <%= form.text_area :body, id: 'review-body', class: 'form-control', required: true, minlength: 10, maxlength: 280 %>
-          <div class="invalid-feedback">
-            Review body has to be 10 to 280 characters long.
+        <div class="card m-1 fs-5">
+          <div class="card-body">
+              <p>
+                <%= review.body %>
+                <%= link_to 'Delete', user_reviews_path(user, id: review.id),
+                                        class: 'btn btn-danger position-absolute top-0 end-0 m-3', method: :delete %>
+                </p>
+              <footer class="blockquote-footer m-0">
+                Added by <%= link_to reviewer(review), review.reviewer %> on <%= review.created_at.to_date %>
+              </footer>
           </div>
         </div>
-        <div class="modal-footer">
-          <%= form.submit 'Submit a review', class: 'btn btn-primary' %>
+      <% end %>
+      <hr> 
+      <h5>Create Review</h5>
+      <%= form_with model: [user, user.reviews_on.build], class: "needs-validation", html: { novalidate: true } do |f| %>
+        <div class="form-group">
+         <%= f.text_area :body, id: 'review-body', class: 'form-control', required: true, minlength: 10, maxlength: 280 , placeholder:'minimum 10 symbols'%>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Send', class: 'btn btn-primary' %>
         </div>
       <% end %>
-    </div>
-  </div>
-</div>
+    
