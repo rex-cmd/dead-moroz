@@ -1,6 +1,19 @@
 
   <%= bootstrap_devise_error_messages! %>
-  
+  <div class="col-3">
+      <div class="text-center position-relative">
+        <%# <%= image_tag current_user.avatar.url, size: '200x200', class: 'img-thumbnail', id: 'avatar-image', alt: 'Avatar' %> %>
+        <%= f.label :avatar, "&nbsp;".html_safe, class: 'stretched-link'%>
+        <%= f.file_field :avatar, class: "form-control d-none" %>
+        <%# <%= f.hidden_field :avatar_cache, class: "form-control" %> 
+      </div>
+      <% if remove_avatar %>
+        <div class="text-center">
+          <%= f.label :remove_avatar %>
+          <%= f.check_box :remove_avatar %>
+        </div>
+      <% end %>
+    </div>
   <div class="form-group">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>

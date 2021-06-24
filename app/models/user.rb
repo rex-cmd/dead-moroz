@@ -13,4 +13,6 @@ class User < ApplicationRecord
   validates :address,     presence: true, length: { maximum: 100 }  
   validates :role,        presence: true
   validates :behavior,    length: { maximum: 400 }
+  
+  mount_uploader :avatar, AvatarUploader
 end

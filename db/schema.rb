@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_22_174650) do
+ActiveRecord::Schema.define(version: 2021_06_24_004423) do
 
   create_table "gifts", force: :cascade do |t|
     t.string "title", null: false
@@ -50,11 +50,12 @@ ActiveRecord::Schema.define(version: 2021_06_22_174650) do
     t.string "address"
     t.integer "role", limit: 1, default: 0, null: false
     t.text "behavior", limit: 300
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "gifts", "users", column: "added_by_id"
-  # add_foreign_key "gifts", "users", column: "recipient_id"
+  add_foreign_key "gifts", "users", column: "recipient_id"
   add_foreign_key "images", "gifts"
 end

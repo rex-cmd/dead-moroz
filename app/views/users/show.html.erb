@@ -1,6 +1,11 @@
 <div class="col-12">
   <div class="row">
     <div class="col-9">
+        <div class="col-3">
+          <div class="text-center position-relative">
+            <%= image_tag user.avatar.url, size: '200x200', class: 'img-thumbnail', id: 'avatar-image', alt: 'Avatar' %>
+          </div>
+        </div>
         <div class="form-group">
           <%= label_tag 'first_name' %>
           <%= text_field_tag 'first_name', user.first_name, readonly: true, class: "form-control" %>
