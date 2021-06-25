@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_013805) do
+ActiveRecord::Schema.define(version: 2021_06_25_201443) do
+
+  create_table "estimates", force: :cascade do |t|
+    t.integer "value", limit: 1, null: false
+    t.text "comment", limit: 280
+    t.integer "author_id"
+    t.integer "target_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_estimates_on_author_id"
+    t.index ["target_id"], name: "index_estimates_on_target_id"
+  end
 
   create_table "gifts", force: :cascade do |t|
     t.string "title", null: false
@@ -65,6 +76,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_013805) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "estimates", "users", column: "author_id"
+  add_foreign_key "estimates", "users", column: "target_id"
   add_foreign_key "gifts", "users", column: "added_by_id"
   add_foreign_key "gifts", "users", column: "recipient_id"
   add_foreign_key "images", "gifts"

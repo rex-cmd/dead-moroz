@@ -7,6 +7,7 @@ Rails.application.routes.draw do
        resources :gifts do
             resource :images, only: %i[create destroy]
        end
+       resource :estimates, only: %i[create destroy]
        resource :reviews, only: %i[create destroy]
   end
   

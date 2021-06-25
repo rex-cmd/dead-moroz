@@ -17,6 +17,8 @@ class Ability
         can :manage, Image, gift: { added_by: user }
         can :show, Review, reviewee: { role: 'kid' }
         can %i[create destroy], Review, reviewer: user, reviewee: { role: 'kid' }
+        can :show, Estimate, target: { role: 'kid' }
+        can %i[show create destroy], Estimate, author: user, target: { role: 'kid' }
        when 'elf'
         can :read, User
         can :read, Gift, recipient: { role: 'kid' }
@@ -24,6 +26,8 @@ class Ability
         can :manage, Image, gift: { added_by: user }
         can :show, Review, reviewee: { role: 'kid' }
         can %i[create destroy], Review, reviewer: user, reviewee: { role: 'kid' }
+        can :show, Estimate, target: { role: 'kid' }
+        can %i[show create destroy], Estimate, author: user, target: { role: 'kid' }
        when 'santa'
         can :read, User
         can :read, Gift, recipient: { role: 'kid' }
@@ -32,6 +36,8 @@ class Ability
         can :manage, Image, gift: { added_by: user }
         can %i[show destroy], Review, reviewee: { role: 'kid' }
         can :create, Review, reviewer: user, reviewee: { role: 'kid' }
+        can :show, Estimate, target: { role: 'kid' }
+        can %i[show create destroy], Estimate, author: user, target: { role: 'kid' }
         end
   end
 end

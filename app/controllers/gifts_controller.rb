@@ -1,8 +1,10 @@
 class GiftsController < ApplicationController
+  load_resource :user
   load_and_authorize_resource through: :user
   helper_method :user, :gift
-
+  skip_load_resource only: :create
   def index
+    authorize! :show, user.gifts.build
     @gifts = @gifts.order('created_at DESC')
   end
   def edit
@@ -15,8 +17,11 @@ class GiftsController < ApplicationController
     @gift.images.build
   end
   def create
+    byebug
     @gift = user.gifts.build(title: gift_params[:title], description: gift_params[:description], added_by: current_user)
+    byebug
     if @gift.save
+      byebug
       create_images if gift_params[:images_attributes].present?
       redirect_to user_gifts_path
       flash[:success] = 'Gift was successfully created.'

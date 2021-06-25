@@ -3,8 +3,8 @@ module UserHelper
       review.reviewer ? review.reviewer.first_name : '[removed]'
     end
   
-    def assessor(assessment)
-      assessment.author ? assessment.author.first_name : '[removed]'
+    def assessor(estimate)
+      estimate.author ? estimate.author.first_name : '[removed]'
     end
 end
   
