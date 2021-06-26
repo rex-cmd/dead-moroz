@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2021_06_25_201443) do
     t.integer "target_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id", "target_id"], name: "index_estimates_on_author_id_and_target_id", unique: true
     t.index ["author_id"], name: "index_estimates_on_author_id"
     t.index ["target_id"], name: "index_estimates_on_target_id"
   end

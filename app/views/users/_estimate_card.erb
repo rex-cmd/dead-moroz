@@ -1,0 +1,21 @@
+<div class="card m-1 fs-5">
+  <div class="card-header">
+    <div class="rating-stars">
+      <ul class='show-rating m-0'>
+        <% 1.upto(estimate.value) do |i| %>
+          <li class='star' title=<%= i %> data-value=<%= i %>>
+            <i class='fa fa-star fa-fw inactive'></i>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    
+    <%= link_to 'Delete', user_estimates_path(user.id, id: estimate.id), method: :delete, class: 'btn btn-danger position-absolute top-0 end-0 m-1' %>
+  </div>
+  <div class="card-body">
+    <p><%= estimate.comment %></p>
+    <footer class="blockquote-footer m-0">
+      Added by <%= link_to assessor(estimate), estimate.author %> on <%= estimate.created_at.to_date %>
+    </footer>
+  </div>
+</div>

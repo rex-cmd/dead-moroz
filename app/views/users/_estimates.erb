@@ -1,0 +1,30 @@
+<hr>
+<% if can? :create, Estimate %>
+  <h2 class="fw-bold">Rating:</h2>
+  <% if estimate.present?%>
+    <%= render 'estimate_card', estimate: estimate %>
+  <% else %>  
+    <div  id="assessment-modal">
+          <%= form_with model: [user, user.estimates_on.build], id: 'form-rating', class: "needs-validation", html: { novalidate: true } do |form| %>
+              <div>
+                <%= form.hidden_field :value, id: 'rating', class: 'form-control' %>
+                <div class='rating-stars'>
+                  <ul id='stars'>
+                    <% 1.upto(10) do |i| %>
+                      <li class='star' title=<%= i %> data-value=<%= i %>>
+                        <i class='fa fa-star fa-fw active'></i>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+
+                <%= form.text_area :comment, id: 'assessment-comment', class: 'form-control', required: true, minlength: 5, maxlength: 280 %>
+              </div>
+              <div class="footer" id="rating-footer">
+                <%= form.submit 'Add', class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+</div>
+  <%end%>
+<% end %>
+

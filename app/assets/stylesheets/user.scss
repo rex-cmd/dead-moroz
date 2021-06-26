@@ -1,0 +1,29 @@
+.rating-stars ul {
+    list-style-type:none;
+    padding: 0;
+    > li.star {
+      display: inline-block;
+      padding: 0;
+      > svg {
+        font-size: 2em;
+        color: #ccc;
+      }
+    }
+  
+    > li.star.hover > svg {
+      color: #FFCC36;
+    }
+  
+    > li.star.selected > svg {
+        color: #FF912C;
+    }
+  }
+  
+  .show-rating li.star > svg {
+    font-size: 1.5em !important;
+    color: #FF912C !important;
+  } 
+  
+  table tr {
+    height: 60px
+  }

@@ -27,17 +27,18 @@
         <%= text_field_tag 'address', user.address, readonly: true, class: "form-control" %>
         </div>
 
-        <% if user.kid? %>
+        <%# <% if user.kid? %> 
         <div class="form-group">
             <%= label_tag 'behavior' %>
             <%= text_area_tag 'behavior', user.behavior, readonly: true, class: "form-control mt-1" %>
         </div>
-        <% end %>
-            
+        <%# <% end %> 
+        <%= render('estimates', user: user, estimate: @estimate) if can? :show, user.estimates_on.build %>
+        <%= render('reviews', user: user) if can? :show, user.reviews_on.build %>
     </div>
   </div>
 </div>
 
-<%= render('reviews', user: user) if can? :show, user.reviews_on.build %>
 
+<%= javascript_pack_tag 'users' %>
 
