@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_25_201443) do
+ActiveRecord::Schema.define(version: 2021_06_26_205044) do
 
   create_table "estimates", force: :cascade do |t|
     t.integer "value", limit: 1, null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_06_25_201443) do
     t.integer "added_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "selected", default: false
     t.index ["added_by_id"], name: "index_gifts_on_added_by_id"
     t.index ["recipient_id"], name: "index_gifts_on_recipient_id"
   end

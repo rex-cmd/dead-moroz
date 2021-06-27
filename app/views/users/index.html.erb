@@ -17,7 +17,7 @@
         <td><%= user.email %></td>
         <td class="text-center">
           <%= link_to 'Add Review', user, class: 'btn btn-outline-primary' %>
-          <%= link_to (current_user.first_name+"'s"+' gifts').html_safe, user_gifts_path(current_user),  class: 'nav-link' %> 
+          <%= link_to (user.first_name+"'s"+' gifts').html_safe, user_gifts_path(user),  class: 'nav-link' %> 
         </td>
       </tr> 
     <% end %>

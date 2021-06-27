@@ -16,4 +16,7 @@ class UsersController < ApplicationController
     def user
         @user ||= User.find(user_params[:id])
     end
+    def user_params
+        params.permit(:id, :page, :direction, :sort, :not_decided)
+      end
 end

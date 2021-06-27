@@ -2,13 +2,14 @@
 
 <h1><%= t('.list_of_gifts') %></h1>
 <% @gifts.each do |gift| %>
-  
   <div class="card border-dark mb-3 text-center ">
+    <div id="gift-card-<%= gift.id %>" class="card my-2">
+      <div class="card-header d-flex justify-content-between position-relative <%= gift_selected_class(gift) %>">
         <h5 class="card-title">
-          <%= gift.title %>
-          <% unless current_user.kid? %>
+          <%= link_to gift.title , [user, gift], class: 'stretched-link'  %>
+          <%# <% unless current_user.kid? %> 
             <small class="fw-lighter"> (added by: <%= gift_creator(gift) %>)</small>
-          <% end %>
+          <%# <% end %> 
         </h5>
         <% unless gift.description.blank? %>
           <div class="card-body mb-2">
@@ -27,14 +28,13 @@
                         class: 'btn-close align-top' %>
           </div>
         <% end %>
-    
-        
+      <%= select_gift_link(gift) %>
       <%= link_to 'Edit', edit_user_gift_url(current_user.id, gift.id), class: 'btn btn-success' %>
       <%= link_to 'Delete', user_gift_path(current_user.id, gift.id) ,method: :delete, class: 'btn btn-danger' %>
-        
   </div>
       
-  
+  </div>
+  </div>
 <% end %>
 
     <%= link_to 'View profile' , users_path(current_user),  class: 'btn  align-text-bottom' %>

@@ -1,8 +1,9 @@
 <%= link_to "Back to list of gifts", [user, Gift], class: 'btn btn-outline-primary' %>
 <div id="gift-card-<%= gift.id %>" class="card my-2">
-  <div class="card-header d-flex justify-content-between">
+  <div class="card-header d-flex justify-content-between <%= gift_selected_class(gift) %>">
     <h5 class="card-title"><%= gift.title %></h5>
     <div>
+        <%= select_gift_link(gift) %>
         <%= link_to 'Edit', edit_user_gift_path(current_user.id, gift.id) , class: 'btn btn-primary' %>
         <%= link_to 'Delete', user_gift_path(current_user.id, gift.id), class: 'btn btn-danger' %>
     </div>
@@ -16,7 +17,7 @@
   <div class="row">
     <% @images.each do |image| %>
       <div class="col text-center">
-        <%= image_tag image.image.url, size: '300x300', class: 'm-1' %>
+        <%= image_tag image.image.url,  class: 'm-1' %>
         <%= link_to '',
                     user_gift_images_path(user, gift, id: image.id),
                     method: :delete,

@@ -17,11 +17,9 @@ class GiftsController < ApplicationController
     @gift.images.build
   end
   def create
-    byebug
     @gift = user.gifts.build(title: gift_params[:title], description: gift_params[:description], added_by: current_user)
-    byebug
     if @gift.save
-      byebug
+      
       create_images if gift_params[:images_attributes].present?
       redirect_to user_gifts_path
       flash[:success] = 'Gift was successfully created.'
@@ -42,6 +40,10 @@ class GiftsController < ApplicationController
     gift.destroy
     redirect_to user_gifts_url
     flash[:success]='Gift was successfully deleted.'
+  end
+
+  def toggle_selected
+    @gift.toggle(:selected).save
   end
   
   private
