@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  
+  devise_for :users, :controllers => { registrations: 'registrations' }
   root 'welcome#index'
-  devise_for :users
+
   resources :users do
        resources :gifts do
           member do
