@@ -13,7 +13,7 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-  config.action_mailer.delivery_method=:test
+  # config.action_mailer.delivery_method=:test
   config.action_mailer.default_url_options={
     :host=> 'localhost:3000'
   }
@@ -36,6 +36,17 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_caching = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+   :authentication => :plain,
+    :address        => 'smtp.mailgun.org',
+    :port           => 587,
+    :domain         => Rails.application.credentials.dig(:mailgun,:MAILGUN_DOMAIN),
+    :user_name      => Rails.application.credentials.dig(:mailgun, :MAILGUN_SMTP_LOGIN),
+    :password       => Rails.application.credentials.dig(:mailgun,:MAILGUN_SMTP_PASSWORD)
+  }
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
