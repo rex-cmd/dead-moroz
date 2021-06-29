@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :address,     presence: true, length: { maximum: 100 }  
   validates :role,        presence: true
   validates :behavior,    length: { maximum: 400 }
-  validates_integrity_of  :avatar
-  validates_processing_of :avatar
+  # validates_integrity_of  :avatar
+  # validates_processing_of :avatar
   
 end
