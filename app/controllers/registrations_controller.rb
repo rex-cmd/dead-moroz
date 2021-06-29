@@ -20,13 +20,13 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
-    # private
-    # def sign_up_params
-    #   params.require(:user).permit(:first_name, :last_name,:birthday, :address, :behavior,  :email, :password,:avatar ,:password_confirmation)
-    # end
+    private
+    def sign_up_params
+      params.require(:user).permit(:first_name, :last_name,:birthday, :address, :behavior,  :email, :password,:avatar ,:password_confirmation)
+    end
   
-    # def account_update_params
-    #   params.require(:user).permit(:first_name, :last_name,:birthday, :address, :behavior,  :email, :password,:avatar, :password_confirmation, :current_password)
-    # end
+    def account_update_params
+      params.require(:user).permit(:first_name, :last_name,:birthday, :address, :behavior,  :email, :password,:avatar, :password_confirmation, :current_password)
+    end
     
   end
