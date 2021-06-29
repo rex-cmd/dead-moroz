@@ -13,5 +13,5 @@ Rails.application.routes.draw do
        resource :estimates, only: %i[create destroy]
        resource :reviews, only: %i[create destroy]
   end
-  resources :invitations, only: %i[index create destroy]
+  
 end
