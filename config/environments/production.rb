@@ -66,11 +66,13 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   host = 'https://obscure-sea-14271.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default_charset = "utf-8"  
+  config.action_mailer.perform_deliveries = true  
   config.action_mailer.delivery_method=:smtp
   config.action_mailer.smtp_settings={
     :authentication => :plain,
     :address        => 'smtp.mailgun.org',
-    :port           => '25',
+    :port           => 587,
     :domain         => Rails.application.credentials.dig(:mailgun,:MAILGUN_DOMAIN),
     :user_name      => Rails.application.credentials.dig(:mailgun, :MAILGUN_SMTP_LOGIN),
     :password       => Rails.application.credentials.dig(:mailgun,:MAILGUN_SMTP_PASSWORD)
