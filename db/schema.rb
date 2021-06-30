@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 2021_06_26_205044) do
     t.string "first_name"
     t.string "last_name"
     t.date "birthday"
-    t.string "adress"
     t.string "address"
     t.integer "role", limit: 1, default: 0, null: false
     t.text "behavior", limit: 300
