@@ -63,19 +63,19 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "dead_moroz_production"
   
-  config.action_mailer.raise_delivery_errors = true
-  host = 'https://obscure-sea-14271.herokuapp.com'
-  config.action_mailer.default_url_options = { host: host }
-  config.action_dispatch.default_charset = "utf-8"  
+  config.action_mailer.raise_delivery_errors = false
+  # host = 'https://obscure-sea-14271.herokuapp.com'
+  # config.action_mailer.default_url_options = { host: host }
+  # config.action_dispatch.default_charset = "utf-8"  
   config.action_mailer.perform_deliveries = true  
-  config.action_mailer.delivery_method=:smtp
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings={
     :authentication => :plain,
     :address        => 'smtp.mailgun.org',
-    :port           => 25,
-    :domain         => Rails.application.credentials.dig(:mailgun,:MAILGUN_DOMAIN),
-    :user_name      => Rails.application.credentials.dig(:mailgun, :MAILGUN_SMTP_LOGIN),
-    :password       => Rails.application.credentials.dig(:mailgun,:MAILGUN_SMTP_PASSWORD)
+    :port           => 587,
+    :domain         => Rails.application.credentials.dig(:mailgun, :domain),
+    :user_name      => Rails.application.credentials.dig(:mailgun, :username),
+    :password       => Rails.application.credentials.dig(:mailgun, :password)
   }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
