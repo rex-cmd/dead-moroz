@@ -16,6 +16,9 @@ gem 'cancancan'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem 'fog-aws'
+gem 'shrine'
+gem 'aws-sdk-s3'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets

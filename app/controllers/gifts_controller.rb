@@ -19,7 +19,6 @@ class GiftsController < ApplicationController
   def create
     @gift = user.gifts.build(title: gift_params[:title], description: gift_params[:description], added_by: current_user)
     if @gift.save
-      
       create_images if gift_params[:images_attributes].present?
       redirect_to user_gifts_path
       flash[:success] = 'Gift was successfully created.'
