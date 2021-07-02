@@ -20,14 +20,16 @@ if Rails.env.development?
     end
 else    
   CarrierWave.configure do |config|
+    onfig.root = Rails.root.join('tmp') # adding these...
+    config.cache_dir = 'carrierwave' 
     config.storage= :fog
     # config.fog_provider = 'fog/aws'
     config.fog_credentials = {
       :provider               => 'AWS',
-      :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
-      :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
-      :region                 => ENV['REGION'],
-      :endpoint               => ENV['ENDPOINT']
+      :access_key_id      => ENV['SPACES_KEY'],
+      :secret_access_key  => ENV['SPACES_SECRET'],
+      :region                 => 'nyc3',
+      :endpoint               => 'https://nyc3.digitaloceanspaces.com'
     }
     config.fog_directory  = ENV['SPACE_NAME']
     # config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
