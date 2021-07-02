@@ -18,16 +18,15 @@ if Rails.env.development?
       config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
       # config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
     end
-else    
+  end
+if Rails.env.production? 
   CarrierWave.configure do |config|
-    config.root = Rails.root.join('tmp') # adding these...
-    config.cache_dir = 'carrierwave' 
     config.storage= :fog
     # config.fog_provider = 'fog/aws'
     config.fog_credentials = {
       :provider               => 'AWS',
-      :access_key_id      => ENV['SPACES_KEY'],
-      :secret_access_key  => ENV['SPACES_SECRET'],
+      :aws_access_key_id          => ENV['SPACES_KEY'],
+      :aws_secret_access_key      => ENV['SPACES_SECRET'],
       :region                 => 'nyc3',
       :endpoint               => 'https://nyc3.digitaloceanspaces.com'
     }
