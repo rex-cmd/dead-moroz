@@ -22,13 +22,13 @@ if Rails.env.development?
 if Rails.env.production? 
   CarrierWave.configure do |config|
     config.storage= :fog
-    # config.fog_provider = 'fog/aws'
+    config.fog_provider = 'fog/aws'
     config.fog_credentials = {
-      :provider               => 'AWS',
-      :aws_access_key_id          => ENV['SPACES_KEY'],
-      :aws_secret_access_key      => ENV['SPACES_SECRET'],
-      :region                 => 'nyc3',
-      :endpoint               => 'https://nyc3.digitaloceanspaces.com'
+      provider:             'AWS',
+      aws_access_key_id:     ENV['SPACES_KEY'],
+      aws_secret_access_key: ENV['SPACES_SECRET'],
+      region:                'nyc3',
+      endpoint:              'https://nyc3.digitaloceanspaces.com'
     }
     config.fog_directory  = ENV['SPACE_NAME']
     # config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
