@@ -20,7 +20,7 @@ if Rails.env.development?
     end
 else    
   CarrierWave.configure do |config|
-    onfig.root = Rails.root.join('tmp') # adding these...
+    config.root = Rails.root.join('tmp') # adding these...
     config.cache_dir = 'carrierwave' 
     config.storage= :fog
     # config.fog_provider = 'fog/aws'
