@@ -19,6 +19,8 @@ gem 'fog'
 gem 'fog-aws'
 gem 'shrine'
 gem 'aws-sdk-s3'
+gem 'fog-digitalocean'
+
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
