@@ -5,7 +5,7 @@ class ImagesController < ApplicationController
   def create
     if image_params[:image].present?
       gift.images.create(image: image_params[:image][:image])
-      redirect_to user_gift_url(id: gift)
+      redirect_to user_gift_path(id: gift)
       flash[:success] = 'Image has been added.'
     else
       redirect_to user_gift_url(id: gift)

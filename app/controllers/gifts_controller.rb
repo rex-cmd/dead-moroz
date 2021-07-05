@@ -7,8 +7,7 @@ class GiftsController < ApplicationController
     authorize! :show, user.gifts.build
     @gifts = @gifts.order('created_at DESC')
   end
-  def edit
-  end
+  def edit; end
   def show
     @images = gift.images.all
     @image = gift.images.build
