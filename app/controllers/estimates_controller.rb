@@ -10,7 +10,7 @@ class EstimatesController < ApplicationController
   
     def destroy
       @estimate.destroy
-      redirect_to user_path(User.find(params[:user_id])), notice: 'Estimation was successfully removed.'
+      redirect_to user_path(user), notice: 'Estimation was successfully removed.'
     end
   
     private
