@@ -33,9 +33,7 @@
             <%= text_area_tag 'behavior', user.behavior, readonly: true, class: "form-control mt-1" %>
         </div>
         <%= link_to "Translate to finnish", user, remote: true, id: 'translate', class: 'btn btn-outline-primary mt-2' %>
-        <div id="translation-spinner" class="spinner-border text-primary m-2 d-none" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
+       
          <%# <% end %>  
         <%= render('estimates', user: user, estimate: @estimate) if can? :show, user.estimates_on.build %>
         <%= render('reviews', user: user) if can? :show, user.reviews_on.build %>

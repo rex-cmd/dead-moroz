@@ -2,7 +2,7 @@
   <%= bootstrap_devise_error_messages! %>
   <div class="col-3">
       <div class="text-center position-relative">
-       <%= image_tag avatar_url, size: '200x200', class: 'img-thumbnail', id: 'avatar-image', alt: 'Avatar' %> 
+       <%#<%= image_tag avatar_url, size: '200x200', class: 'img-thumbnail', id: 'avatar-image', alt: 'Avatar' %> 
         <%= f.label :avatar, "&nbsp;".html_safe, class: 'stretched-link'%>
         <%= f.file_field :avatar, class: "form-control d-none" %>
         

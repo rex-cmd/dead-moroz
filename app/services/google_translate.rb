@@ -12,5 +12,4 @@ module GoogleTranslate
       response = Excon.send(:post, 'https://google-translate1.p.rapidapi.com/language/translate/v2', params)
       JSON.parse(response.body)['data']['translations'].first['translatedText']
     end
-   
 end
