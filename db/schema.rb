@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2021_06_26_205044) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "estimates", force: :cascade do |t|
-    t.integer "value", limit: 1, null: false
-    t.text "comment", limit: 280
-    t.integer "author_id"
-    t.integer "target_id", null: false
+    t.integer "value", limit: 2, null: false
+    t.text "comment"
+    t.bigint "author_id"
+    t.bigint "target_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id", "target_id"], name: "index_estimates_on_author_id_and_target_id", unique: true
@@ -27,8 +30,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_205044) do
   create_table "gifts", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
-    t.integer "recipient_id", null: false
-    t.integer "added_by_id"
+    t.bigint "recipient_id", null: false
+    t.bigint "added_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "selected", default: false
@@ -38,16 +41,16 @@ ActiveRecord::Schema.define(version: 2021_06_26_205044) do
 
   create_table "images", force: :cascade do |t|
     t.string "image"
-    t.integer "gift_id", null: false
+    t.bigint "gift_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["gift_id"], name: "index_images_on_gift_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text "body", limit: 280, null: false
-    t.integer "reviewee_id", null: false
-    t.integer "reviewer_id"
+    t.text "body", null: false
+    t.bigint "reviewee_id", null: false
+    t.bigint "reviewer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reviewee_id"], name: "index_reviews_on_reviewee_id"
@@ -70,8 +73,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_205044) do
     t.string "last_name"
     t.date "birthday"
     t.string "address"
-    t.integer "role", limit: 1, default: 0, null: false
-    t.text "behavior", limit: 300
+    t.integer "role", limit: 2, default: 0, null: false
+    t.text "behavior"
     t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
