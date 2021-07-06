@@ -1,4 +1,6 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
+
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -14,12 +16,11 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
   # config.action_mailer.delivery_method=:test
-  
-  
+
   # Enable/disable caching. By default caching is disabled.
 
   # Run rails dev:cache to toggle caching.
-  
+
   if (Rails.root / 'tmp' / 'caching-dev.txt').exist?
     config.cache_store = :redis_cache_store, {
       url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/0'),
@@ -34,7 +35,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.action_mailer.default_url_options={
+  config.action_mailer.default_url_options = {
     host: 'localhost:3000'
   }
   config.active_storage.service = :local
@@ -43,12 +44,12 @@ Rails.application.configure do
   config.action_mailer.perform_caching = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-   :authentication => :plain,
-    :address        => 'smtp.mailgun.org',
-    :port           => 587,
-    :domain         => Rails.application.credentials.dig(:mailgun, :domain),
-    :user_name      => Rails.application.credentials.dig(:mailgun, :username),
-    :password       => Rails.application.credentials.dig(:mailgun, :password)
+    authentication: :plain,
+    address: 'smtp.mailgun.org',
+    port: 587,
+    domain: Rails.application.credentials.dig(:mailgun, :domain),
+    user_name: Rails.application.credentials.dig(:mailgun, :username),
+    password: Rails.application.credentials.dig(:mailgun, :password)
   }
   # Don't care if the mailer can't send.
   # config.action_mailer.raise_delivery_errors = false

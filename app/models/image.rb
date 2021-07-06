@@ -1,6 +1,8 @@
-class Image < ApplicationRecord
-    belongs_to :gift
-    validates_associated :gift
+# frozen_string_literal: true
 
-    mount_uploader :image, ImageUploader
+class Image < ApplicationRecord
+  belongs_to :gift
+  validates_associated :gift
+
+  mount_uploader :image, ImageUploader
 end

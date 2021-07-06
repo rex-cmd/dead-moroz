@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 class InvitationsController < ApplicationController
   load_and_authorize_resource
   def index
     @invitation = Invitation.new
   end
+
   def create
     if @invitation.save
-      NotificationMailer.elf_invite_email(@invitation.email, new_user_registration_url(token: @invitation.token)).deliver_now
+      NotificationMailer.elf_invite_email(@invitation.email,
+                                          new_user_registration_url(token: @invitation.token)).deliver_now
       InvitationWorker.perform_at(1.day.from_now, @invitation.id, current_user.email)
       notice = 'Invite was successfully sent'
     end

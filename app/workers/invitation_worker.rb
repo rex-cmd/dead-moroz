@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvitationWorker < ApplicationWorker
   def perform(invitation_id, inviter_email)
     invite = Invitation.find_by(id: invitation_id)

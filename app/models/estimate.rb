@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Estimate < ApplicationRecord
   belongs_to :author, class_name: 'User', optional: true, inverse_of: :estimates_by
   belongs_to :target, class_name: 'User', inverse_of: :estimates_on

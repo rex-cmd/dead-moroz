@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GiftsController < ApplicationController
   load_resource :user
   load_and_authorize_resource through: :user
@@ -7,14 +9,18 @@ class GiftsController < ApplicationController
     authorize! :show, user.gifts.build
     @gifts = @gifts.order('created_at DESC')
   end
+
   def edit; end
+
   def show
     @images = gift.images.all
     @image = gift.images.build
   end
+
   def new
     @gift.images.build
   end
+
   def create
     @gift = user.gifts.build(title: gift_params[:title], description: gift_params[:description], added_by: current_user)
     if @gift.save
@@ -25,10 +31,11 @@ class GiftsController < ApplicationController
       render :new
     end
   end
+
   def update
     if gift.update(gift_params)
       redirect_to user_gift_path
-      flash[:success]='Gift was successfully updated.'
+      flash[:success] = 'Gift was successfully updated.'
     else
       render :edit
     end
@@ -37,13 +44,13 @@ class GiftsController < ApplicationController
   def destroy
     gift.destroy
     redirect_to user_gifts_url
-    flash[:success]='Gift was successfully deleted.'
+    flash[:success] = 'Gift was successfully deleted.'
   end
 
   def toggle_selected
     @gift.toggle(:selected).save
   end
-  
+
   private
 
   def user

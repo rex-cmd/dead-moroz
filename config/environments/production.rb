@@ -1,12 +1,13 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
+
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-  
-  
+
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -54,7 +55,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
   config.cache_store = :redis_cache_store, {
     url: ENV.fetch('REDIS_URL'),
     connect_timeout: 30,
@@ -68,20 +69,20 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "dead_moroz_production"
-  
+
   config.action_mailer.raise_delivery_errors = false
   host = 'obscure-sea-14271.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
-  # config.action_dispatch.default_charset = "utf-8"  
-  config.action_mailer.perform_deliveries = true  
+  # config.action_dispatch.default_charset = "utf-8"
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings={
-    :authentication => :plain,
-    :address        => 'smtp.mailgun.org',
-    :port           => 587,
-    :domain         => Rails.application.credentials.dig(:mailgun, :domain),
-    :user_name      => Rails.application.credentials.dig(:mailgun, :username),
-    :password       => Rails.application.credentials.dig(:mailgun, :password)
+  config.action_mailer.smtp_settings = {
+    authentication: :plain,
+    address: 'smtp.mailgun.org',
+    port: 587,
+    domain: Rails.application.credentials.dig(:mailgun, :domain),
+    user_name: Rails.application.credentials.dig(:mailgun, :username),
+    password: Rails.application.credentials.dig(:mailgun, :password)
   }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -107,8 +108,8 @@ Rails.application.configure do
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
+    logger           = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end

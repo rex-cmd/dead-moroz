@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEstimates < ActiveRecord::Migration[6.1]
   def change
     create_table :estimates do |t|
@@ -8,6 +10,6 @@ class CreateEstimates < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :estimates, [:author_id, :target_id], unique: true
+    add_index :estimates, %i[author_id target_id], unique: true
   end
 end

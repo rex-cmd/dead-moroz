@@ -1,13 +1,14 @@
-class RegistrationsController < Devise::RegistrationsController
-  before_action :verify_invite, only: :new
-  helper_method :invite
+# frozen_string_literal: true
 
+class RegistrationsController < Devise::RegistrationsController
+  before_action :verify_invite
+  helper_method :invite
   def create
     super do |resource|
-      @invite = Invitation.find_by(email: params[:user][:email])# can't find by token becouse params are updated
+      @invite = Invitation.find_by(email: params[:user][:email]) # can't find by token becouse params are updated
       if @invite.present?
         resource.update(role: 'elf')
-        invite.accept!
+        @invite.accept!
       end
     end
   end
@@ -20,6 +21,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def invite
-    @invite ||= Invitation.find_by(token: params[:token])#only token is passed in params
+    @invite ||= Invitation.find_by(token: params[:token]) # only token is passed in params
   end
 end

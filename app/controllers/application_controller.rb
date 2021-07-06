@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   SIGN_UP_PERMITTED_KEYS = %i[first_name last_name birthday address behavior avatar remove_avatar].freeze
   ACCOUNT_UPDATE_PERMITTED_KEYS = SIGN_UP_PERMITTED_KEYS + [:remove_avatar]
@@ -9,6 +11,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do
     redirect_back fallback_location: root_path, alert: 'Access denied!'
   end
+
   protected
 
   def configure_permitted_parameters

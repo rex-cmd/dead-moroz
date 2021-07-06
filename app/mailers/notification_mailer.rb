@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationMailer < ApplicationMailer
   def elf_invite_email(email, invite_link)
     @invite_link = invite_link
