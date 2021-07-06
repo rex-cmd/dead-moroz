@@ -5,11 +5,8 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super do |resource|
       @invite = Invitation.find_by(email: params[:user][:email])# can't find by token becouse params are updated
-      byebug
       if @invite.present?
-        byebug
         resource.update(role: 'elf')
-        byebug
         invite.accept!
       end
     end
