@@ -14,27 +14,29 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
   # config.action_mailer.delivery_method=:test
-  config.action_mailer.default_url_options={
-    host: 'localhost:3000'
-  }
+  
   
   # Enable/disable caching. By default caching is disabled.
-  # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
-    config.action_controller.perform_caching = true
-    config.action_controller.enable_fragment_cache_logging = true
 
-    config.cache_store = :memory_store
-    config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+  # Run rails dev:cache to toggle caching.
+  
+  if (Rails.root / 'tmp' / 'caching-dev.txt').exist?
+    config.cache_store = :redis_cache_store, {
+      url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/0'),
+      connect_timeout: 30,
+      read_timeout: 0.2,
+      write_timeout: 0.2,
+      reconnect_attempts: 1
     }
   else
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.action_mailer.default_url_options={
+    host: 'localhost:3000'
+  }
   config.active_storage.service = :local
 
   config.action_mailer.raise_delivery_errors = true

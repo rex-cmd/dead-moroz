@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     include GoogleTranslate 
     def index 
         @users = @users.kid.with_not_decided_gifts if can?(:toggle_selected, Gift) && user_params[:not_decided] == 'true'
-        @users = @users.by_number_of_reviews if current_user.elf?
+        # @users = @users.by_number_of_reviews if current_user.elf?
        
     end
 
@@ -12,9 +12,7 @@ class UsersController < ApplicationController
         @estimate = user.estimates_on.find_by(author: current_user)
         respond_to do |format|
           format.js do
-            @translation = Rails.cache.fetch(['translate', user.cache_key_with_version], expires_in: 1.hour) do
-              GoogleTranslate.translate(@user.behavior)
-            end
+            tr_cache_behavior
           end
           format.html
         end
