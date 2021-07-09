@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class NotificationMailer < ApplicationMailer
+  def work_reminder_email(email)
+    mail to: email, subject: 'Back to work'
+  end
+  
   def elf_invite_email(email, invite_link)
     @invite_link = invite_link
     mail to: email, subject: 'Elf registration invite'

@@ -4,7 +4,7 @@
   <% if estimate.present?%>
     <%= render 'estimate_card', estimate: estimate %>
   <% else %>  
-    <div  id="assessment-modal">
+    <div >
           <%= form_with model: [user, user.estimates_on.build], id: 'form-rating', class: "needs-validation", html: { novalidate: true } do |form| %>
               <div>
                 <%= form.hidden_field :value, id: 'rating', class: 'form-control' %>
@@ -18,7 +18,7 @@
                   </ul>
                 </div>
 
-                <%= form.text_area :comment, id: 'assessment-comment', class: 'form-control', required: true, minlength: 5, maxlength: 280 %>
+                <%= form.text_area :comment, class: 'form-control', required: true, minlength: 5, maxlength: 280 %>
               </div>
               <div class="footer" id="rating-footer">
                 <%= form.submit 'Add', class: 'btn btn-primary' %>

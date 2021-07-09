@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'sidekiq/web'
-require 'sidekiq-scheduler/web'
+# require 'sidekiq/web'
+# require 'sidekiq-scheduler/web'
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'registrations' }
   root 'welcome#index'
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :users do
     resources :gifts do

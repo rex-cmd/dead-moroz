@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  scope :with_decided_gifts,     -> { joins(:gifts).where(gifts: { selected: true }).uniq }
+  scope :with_not_decided_gifts, -> { where.not(id: with_decided_gifts.pluck(:id)) }
+  scope :with_selected_gifts,    -> { joins('JOIN gifts on users.id = added_by_id').where(gifts: { selected: true }).uniq }
+  
   mount_uploader :avatar, AvatarUploader
-  enum role: { kid: 0, elf: 1, santa: 2 }
+  enum role: { kid: 0, elf: 1, santa: 2, admin: 3 }
 
   has_many :gifts,       class_name: 'Gift', foreign_key: 'recipient_id', dependent: :destroy, inverse_of: :recipient
   has_many :gifts_added, class_name: 'Gift', foreign_key: 'added_by_id',  dependent: :nullify, inverse_of: :added_by
@@ -21,6 +25,7 @@ class User < ApplicationRecord
   validates :address,     presence: true, length: { maximum: 100 }
   validates :role,        presence: true
   validates :behavior,    length: { maximum: 400 }
-  # validates_integrity_of  :avatar
-  # validates_processing_of :avatar
+  validates :email,       uniqueness: true
+
+  paginates_per 10
 end

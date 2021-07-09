@@ -16,11 +16,13 @@ gem 'cancancan'
 gem 'carrierwave'
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'discard'
 gem 'figaro'
 gem 'fog'
 gem 'fog-aws'
 gem 'fog-digitalocean'
 gem 'jquery-rails'
+gem 'kaminari'
 gem 'mini_magick'
 gem 'rubocop'
 gem 'rubocop-rails'
@@ -28,6 +30,7 @@ gem 'rubocop-rspec'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'twitter-bootstrap-rails'
+
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -54,7 +57,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  # gem 'sqlite3', '~> 1.4'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 # group :production do
 #   gem 'pg'
@@ -73,9 +79,12 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
+  gem 'shoulda-matchers', '~> 4.0'
+  gem 'simplecov', require: false
   gem 'webdrivers'
+  gem 'email_spec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

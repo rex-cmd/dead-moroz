@@ -6,7 +6,9 @@
         <ul class="nav navbar-nav ">
             <% if user_signed_in? %>
             <li class="nav-item">
-                <%= link_to 'My gifts', user_gifts_path(current_user),  class: 'nav-link' %> 
+            <% unless current_user.santa? %> 
+                <%= link_to('My gifts', user_gifts_path(current_user),  class: 'nav-link') if can?(:index, Gift) %> 
+            <%end%>    
             </li>
             <li class="nav-item">
                 <%= link_to('Users', users_path) if can?(:index, User) %>
@@ -28,9 +30,7 @@
           <ul class='nav navbar-right col-md-4'>
             <%if user_signed_in?%>
                 <li class='col-md-8 user-name'>
-                <%#<% if current_user.avatar.present? %>
                   <%=image_tag current_user.avatar.url, size: '50x50', class: 'img-thumbnail', id: 'avatar-image' %>
-                
                   <%=link_to ('<i class="fa fa-user"></i>' + current_user.first_name+current_user.last_name).html_safe, edit_user_registration_path, title:'Edit Profile'%>
                 </li>
                 <li class='col-md-1'>

@@ -7,9 +7,9 @@
       <div class="card-header d-flex justify-content-between position-relative <%= gift_selected_class(gift) %>">
         <h5 class="card-title">
           <%= link_to gift.title , [user, gift], class: 'stretched-link'  %>
-          <%# <% unless current_user.kid? %> 
+          <% unless current_user.kid? %> 
             <small class="fw-lighter"> (added by: <%= gift_creator(gift) %>)</small>
-          <%# <% end %> 
+          <% end %> 
         </h5>
         <% unless gift.description.blank? %>
           <div class="card-body mb-2">

@@ -10,17 +10,21 @@
     </tr>
   </thead>
   <tbody>
+ 
     <% @users.each do |user| %>
       <tr>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.email %></td>
         <td class="text-center">
-          <%= link_to 'Add Review', user, class: 'btn btn-outline-primary' %>
+          <%= link_to 'Show Profile', user, class: 'btn btn-outline-primary' %>
+        <%if user.role=='kid'%> 
           <%= link_to (user.first_name+"'s"+' gifts').html_safe, user_gifts_path(user),  class: 'nav-link' %> 
+        <%end%> 
         </td>
       </tr> 
-    <% end %>
+    <%end%> 
   </tbody>
 </table>
 
+<%= paginate @users %> 

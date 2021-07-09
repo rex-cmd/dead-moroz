@@ -1,12 +1,4 @@
-<% if can? :create, Invitation %>
-    <%= button_tag 'Invite an elf', 'data-bs-toggle': 'modal', 'data-bs-target': '#invitation-modal', class: 'btn btn-success' %>
-<% end %>
-
-
-  
-    
-      
-     <h5 class="title">Invite an elf via email</h5>
+  <h5 class="title">Invite an elf via email</h5>
       <%= form_with model: @invitation, class: "needs-validation", html: { novalidate: true } do |f| %>
         <div class="modal-body">
           <%= f.email_field :email, class: 'form-control', required: true %>
@@ -36,12 +28,7 @@
         <td><%= invite.status %></td>
         <td class="text-center">
           <p id='invite-link-<%= ind %>' class='d-none'><%= new_user_registration_url token: invite.token %></p>
-          <%= button_tag 'Copy invite link to clipboard',
-                         type: :button,
-                         target: "#invite-link-#{ ind }",
-                         class: 'btn btn-copy btn-outline-primary',
-                         'data-bs-content': "Copied!" %>
-         <%#<%= destroy_link invite, class: 'btn btn-danger' %>
+         
         </td>
       </tr>
     <% end %>
@@ -50,3 +37,4 @@
 
 
 <%= javascript_pack_tag 'invitations' %>
+<%= paginate @invitations %>
