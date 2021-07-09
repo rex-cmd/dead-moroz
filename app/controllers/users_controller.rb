@@ -15,9 +15,7 @@ class UsersController < ApplicationController
     @estimate = user.estimates_on.find_by(author: current_user)
     respond_to do |format|
       format.js do
-        @translation = Rails.cache.fetch(['translate', user.cache_key_with_version], expires_in: 1.hour) do
-          GoogleTranslate.translate(user.behavior)
-        end
+        cache_in_translation
       end
       format.html
     end
@@ -25,6 +23,12 @@ class UsersController < ApplicationController
 
   private
 
+  def cache_in_translation
+    @translation = Rails.cache.fetch(['translate', user.cache_key_with_version], expires_in: 1.hour) do
+      GoogleTranslate.translate(user.behavior)
+    end
+  end
+  
   def user
     @user ||= User.find(user_params[:id])
   end
