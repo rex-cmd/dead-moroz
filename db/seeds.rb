@@ -24,3 +24,12 @@ User.create!(
   address: 'Laplandia',
   role: 'admin',
 )
+User.create!( 
+  email: 'undrsgjn@sharklasers.com',
+  password: '123456',
+  birthday: "2021-07-01",
+  first_name: 'admin',
+  last_name: 'admin',
+  address: 'Laplandia',
+  role: 'admin',
+)

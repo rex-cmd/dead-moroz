@@ -6,7 +6,7 @@
         <ul class="nav navbar-nav ">
             <% if user_signed_in? %>
             <li class="nav-item">
-            <% unless current_user.santa? %> 
+            <% if current_user.role=='kid' %> 
                 <%= link_to('My gifts', user_gifts_path(current_user),  class: 'nav-link') if can?(:index, Gift) %> 
             <%end%>    
             </li>

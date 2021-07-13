@@ -4,7 +4,6 @@ class User < ApplicationRecord
   scope :with_decided_gifts,     -> { joins(:gifts).where(gifts: { selected: true }).uniq }
   scope :with_not_decided_gifts, -> { where.not(id: with_decided_gifts.pluck(:id)) }
   scope :with_selected_gifts,    -> { joins('JOIN gifts on users.id = added_by_id').where(gifts: { selected: true }).uniq }
-  
   mount_uploader :avatar, AvatarUploader
   enum role: { kid: 0, elf: 1, santa: 2, admin: 3 }
 

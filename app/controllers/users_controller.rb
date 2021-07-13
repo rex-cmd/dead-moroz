@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   helper_method :user, :sort_column, :sort_direction, :sortable_columns
 
-  include GoogleTranslate
   def index
     @users = @users.kid.with_not_decided_gifts if can?(:toggle_selected, Gift) && user_params[:not_decided] == 'true'
     @users = @users.order("#{sort_column} #{sort_direction}").page(user_params[:page])
@@ -13,6 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @estimate = user.estimates_on.find_by(author: current_user)
+    @reviews = Review.all.includes(:reviewer)
     respond_to do |format|
       format.js do
         cache_in_translation

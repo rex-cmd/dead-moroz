@@ -16,7 +16,7 @@ class Ability
       can :show, Estimate, target: { role: 'kid' }
       can %i[show create destroy], Estimate, author: user, target: { role: 'kid' }
       can :show, Review, reviewee: { role: 'kid' }
-      can %i[create destroy], Review, reviewer: user, reviewee: { role: 'kid' }
+      can %i[create], Review, reviewer: user, reviewee: { role: 'kid' }
     when 'santa'
       can :read, User
       can %i[read toggle_selected], Gift, recipient: { role: 'kid' }

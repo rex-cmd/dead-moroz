@@ -40,7 +40,11 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = :random
-
+  config.after(:suite) do # or :each or :all
+    Dir["#{Rails.root}/tmp/paperclip/**/*"].each do |file|
+        File.delete(file)
+    end
+  end
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce
   # test failures related to randomization by passing the same `--seed` value

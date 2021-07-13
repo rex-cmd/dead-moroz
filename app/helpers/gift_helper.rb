@@ -2,7 +2,13 @@
 
 module GiftHelper
   def gift_creator(gift)
-    gift.added_by ? gift.added_by.first_name : '[removed]'
+    if gift.added_by.role == 'elf'
+      gift.added_by.role
+    elsif gift.added_by.role == 'kid'
+      gift.added_by.first_name
+    else
+      '[removed]'
+    end
   end
 
   def gift_selected_class(gift)

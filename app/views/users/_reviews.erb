@@ -7,8 +7,10 @@
           <div class="card-body">
               <p>
                 <%= review.body %>
+                <% if current_user.role=='santa' || current_user.role=='admin'%>
                 <%= link_to 'Delete', user_reviews_path(user, id: review.id),
                                         class: 'btn btn-danger position-absolute top-0 end-0 m-3', method: :delete %>
+                <%end%>                        
                 </p>
               <footer class="blockquote-footer m-0">
                 Added by <%= link_to reviewer(review), review.reviewer %> on <%= review.created_at.to_date %>
