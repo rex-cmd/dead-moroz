@@ -30,7 +30,14 @@ gem 'rubocop-rspec'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'twitter-bootstrap-rails'
-
+gem 'rack-cors'
+gem 'active_model_serializers'
+gem 'activeadmin'
+gem "active_material", github: "vigetlabs/active_material"
+gem 'jwt'
+gem 'devise-jwt'
+gem 'jsonapi-rails'
+gem 'rest-client'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -86,6 +93,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'webdrivers'
   gem 'email_spec'
+  gem 'jsonapi-rspec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

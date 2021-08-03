@@ -6,16 +6,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!( 
-  email: 'un@sharklasers.com',
-  password: '123456',
-  birthday: "2021-07-01",
-  first_name: 'Dead',
-  last_name: 'Moroz',
-  address: 'Laplandia',
-  role: 'santa',
-)
-User.create!( 
+# User.create!( 
+#   email: 'un@sharklasers.com',
+#   password: '123456',
+#   birthday: "2021-07-01",
+#   first_name: 'Dead',
+#   last_name: 'Moroz',
+#   address: 'Laplandia',
+#   role: 'santa',
+# )
+# User.create!( 
   email: 'ma@sharklasers.com',
   password: '123456',
   birthday: "2021-07-01",
@@ -23,13 +23,15 @@ User.create!(
   last_name: 'Moroz',
   address: 'Laplandia',
   role: 'admin',
-)
-User.create!( 
-  email: 'undrsgjn@sharklasers.com',
-  password: '123456',
-  birthday: "2021-07-01",
-  first_name: 'admin',
-  last_name: 'admin',
-  address: 'Laplandia',
-  role: 'admin',
-)
+# )
+# User.create!( 
+#   email: 'undrsgjn@sharklasers.com',
+#   password: '123456',
+#   birthday: "2021-07-01",
+#   first_name: 'admin',
+#   last_name: 'admin',
+#   address: 'Laplandia',
+#   role: 'admin',
+# )
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'undrsgjn@sharklasers.com', password: '123456', password_confirmation: '123456') if Rails.env.development?

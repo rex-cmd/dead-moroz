@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class GiftsController < ApplicationController
   load_resource :user
   load_and_authorize_resource through: :user
@@ -8,6 +7,7 @@ class GiftsController < ApplicationController
   def index
     authorize! :show, user.gifts.build
     @gifts = @gifts.order('created_at DESC')
+    render json: @gifts
   end
 
   def edit; end
@@ -15,6 +15,7 @@ class GiftsController < ApplicationController
   def show
     @images = gift.images.all
     @image = gift.images.build
+    render json: @images
   end
 
   def new
@@ -25,11 +26,19 @@ class GiftsController < ApplicationController
     @gift = user.gifts.build(title: gift_params[:title], description: gift_params[:description], added_by: current_user)
     if @gift.save
       create_images if gift_params[:images_attributes].present?
-      redirect_to user_gifts_path
-      flash[:success] = 'Gift was successfully created.'
+      # gift_params[:images_attributes][:image].each do |image|
+      #   @gift.images.create(image: image)
+      #   render json: {response:"If you see this, you have an image!" }
+      # end
+# render json: gift_params[:images_attributes][:image]
+      # redirect_to user_gifts_path
+       # flash[:success] = 'Gift was successfully created.'
+    #  render json: @gift
     else
-      render :new
+      # render :new
+      # render json: {response:"If you see this, you don't have an image!" }
     end
+  # render json: @gift
   end
 
   def update
@@ -62,14 +71,18 @@ class GiftsController < ApplicationController
   end
 
   def create_images
-    Image.transaction do # If any kind of unhandled error happens inside the block, the transaction will be aborted, and no changes will be made to the DB.
-      gift_params[:images_attributes]['0']['image'].each do |image|
-        @gift.images.create(image: image)
-      end
+    Image.transaction do
+      # gift_params[:images_attributes][:image].each do |image|
+      #   @gift.images.create(image: image)
+      # end
+      @gift.images.create(image: gift_params[:images_attributes][:image] )
+      render json: gift_params[:images_attributes][:image] 
     end
+   
   end
 
   def gift_params
-    params.require(:gift).permit(:title, :description, images_attributes: [image: []])
+    # params.require(:gift).permit(:title, :description, images_attributes: [image: []])
+     params.require(:gift).permit(:title, :description, images_attributes: {image: :url})
   end
 end

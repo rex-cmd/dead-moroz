@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::API
   SIGN_UP_PERMITTED_KEYS = %i[first_name last_name birthday address behavior avatar remove_avatar].freeze
   ACCOUNT_UPDATE_PERMITTED_KEYS = SIGN_UP_PERMITTED_KEYS + [:remove_avatar]
   # before_action :authenticate_user!
@@ -11,7 +11,16 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do
     redirect_back fallback_location: root_path, alert: 'Access denied!'
   end
-
+  def render_jsonapi_response(resource)
+    if resource.errors.empty?
+      render jsonapi: resource
+    else
+      render jsonapi_errors: resource.errors, status: 400
+    end
+  end
+  def fallback_index_html
+    render file: 'public/index.html'
+  end
   protected
 
   def configure_permitted_parameters

@@ -6,19 +6,17 @@ class ImagesController < ApplicationController
 
   def create
     if image_params[:image].present?
-      gift.images.create(image: image_params[:image][:image])
-      redirect_to user_gift_path(id: gift)
-      flash[:success] = 'Image has been added.'
+      gift.images.create(image: {url: image_params[:image] } )
+      # gift.images.create(image: image_params[:image][:image])
+      render json: gift.images
     else
-      redirect_to user_gift_url(id: gift)
-      flash[:danger] = 'Choose an image first.'
+      render json: image_params
     end
   end
 
   def destroy
     @image.destroy
     redirect_to user_gift_url(id: gift)
-    flash[:success] = 'Image has been removed.'
   end
 
   private
@@ -28,6 +26,7 @@ class ImagesController < ApplicationController
   end
 
   def image_params
-    params.permit(:id, image: [:image])
+    # params.permit(:id, image: [:image])
+    params.permit(:id, :gift_id, :user_id, image: :url)
   end
 end

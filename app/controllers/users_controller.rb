@@ -1,24 +1,31 @@
 class UsersController < ApplicationController
   SORTABLE_COLUMNS = %w[first_name last_name birthdate email].freeze
   include Sortable
-
   load_and_authorize_resource
+  
   helper_method :user, :sort_column, :sort_direction, :sortable_columns
 
   def index
-    @users = @users.kid.with_not_decided_gifts if can?(:toggle_selected, Gift) && user_params[:not_decided] == 'true'
-    @users = @users.order("#{sort_column} #{sort_direction}").page(user_params[:page])
+    # @users = @users.kid.with_not_decided_gifts if can?(:toggle_selected, Gift) && user_params[:not_decided] == 'true'
+    # @users = @users.order("#{sort_column} #{sort_direction}").page(user_params[:page])
+    # users = User.last
+    render json: @users
   end
 
   def show
-    @estimate = user.estimates_on.find_by(author: current_user)
-    @reviews = Review.all.includes(:reviewer)
-    respond_to do |format|
-      format.js do
-        cache_in_translation
-      end
-      format.html
-    end
+    @user=User.last
+     render json: @user
+    # @estimate = user.estimates_on.find_by(author: current_user), @reviews = Review.all.includes(:reviewer)
+    # ??????????
+    # render json: @estimate
+    # render json: @reviews
+    # ?????????????
+    # respond_to do |format|
+    #   format.js do
+    #     cache_in_translation
+    #   end
+    #   format.html
+    # end
   end
 
   private
@@ -27,6 +34,7 @@ class UsersController < ApplicationController
     @translation = Rails.cache.fetch(['translate', user.cache_key_with_version], expires_in: 1.hour) do
       GoogleTranslate.translate(user.behavior)
     end
+    render json: @translation
   end
   
   def user

@@ -11,7 +11,7 @@ class Gift < ApplicationRecord
 
   validates :title,       presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 100 }
-  validates :images,      length: { maximum: 2, message: 'Only 3 images are allowed. The rest were discarded.' }
+  validates :images,      length: { maximum: 10, message: 'Only 3 images are allowed. The rest were discarded.' }
 
-  # paginates_per 10
+  paginates_per 10
 end

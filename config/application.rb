@@ -27,5 +27,8 @@ module DeadMoroz
     config.time_zone = 'Helsinki'
     config.active_record.default_timezone = :local
     config.active_job.queue_adapter = :sidekiq
+    config.api_only = false
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end

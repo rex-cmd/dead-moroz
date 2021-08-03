@@ -3,11 +3,13 @@ class InvitationsController < ApplicationController
   include Sortable
 
   load_and_authorize_resource
+  # skip_authorization_check
   helper_method :sort_column, :sort_direction, :sortable_columns
 
   def index
     @invitations = @invitations.order("#{sort_column} #{sort_direction}").page(params[:page])
     @invitation = Invitation.new
+    render json: @invitations
   end
 
   def create

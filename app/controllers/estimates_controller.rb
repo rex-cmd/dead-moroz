@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EstimatesController < ApplicationController
+class EstimatesController < ApplicationController::Base
   load_and_authorize_resource through: :user, through_association: :estimates_on
   helper_method :user
 

@@ -2,5 +2,7 @@
 
 class WelcomeController < ApplicationController
   skip_authorization_check
-  def index; end
+  def index
+    render json: {message: 'Welcome'}
+  end
 end

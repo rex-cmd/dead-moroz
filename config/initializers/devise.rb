@@ -15,7 +15,11 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '047540ce9c6e3096070ce0fa537778e72d838925b66e4bf335eebfac2e72909c2a869392eb4f43e2269d1bd2e31948979ecd99f11ebb98608f2831ef12ea2f40'
-
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.credentials.dig(:devise, :jwt_secret_key)
+    
+  end
+  
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -261,9 +265,9 @@ Devise.setup do |config|
   #
   # If you have any extra navigational formats, like :iphone or :mobile, you
   # should add them to the navigational formats lists.
-  #
+  #s
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+   config.navigational_formats = []
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete

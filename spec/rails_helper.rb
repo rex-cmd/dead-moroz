@@ -29,7 +29,9 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include RequestSpecHelper, type: :request
   config.include RequestSpecHelper, type: :feature
-
+  config.include UserHelpers
+  config.include JSONAPI::RSpec
+  config.include ApiHelpers
   config.use_transactional_fixtures = true
 
   config.infer_spec_type_from_file_location!

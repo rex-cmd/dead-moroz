@@ -16,13 +16,19 @@ class User < ApplicationRecord
   has_many :estimates_on,  class_name: 'Estimate', foreign_key: 'target_id', dependent: :destroy, inverse_of: :target
   has_many :estimates_by,  class_name: 'Estimate', foreign_key: 'author_id', dependent: :nullify, inverse_of: :author
 
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, 
+         :registerable, 
+         :confirmable,
+         :recoverable, 
+         :rememberable, 
+         :validatable, 
+         :jwt_authenticatable,
+         jwt_revocation_strategy: JwtDenylist
 
-  validates :first_name,  presence: true, length: { maximum: 25 }
-  validates :last_name,   presence: true, length: { maximum: 25 }
-  validates :address,     presence: true, length: { maximum: 100 }
-  validates :role,        presence: true
+  validates :first_name,  length: { maximum: 25 }
+  validates :last_name,   length: { maximum: 25 }
+  validates :address,     length: { maximum: 100 }
+  validates :role ,        length: { maximum: 100 }
   validates :behavior,    length: { maximum: 400 }
   validates :email,       uniqueness: true
 
